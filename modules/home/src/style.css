@@ -1,0 +1,15 @@
+#products__container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+#categories__container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.card__container {
+    display: flex;
+    overflow: scroll;
+    gap: 60px;
+}
