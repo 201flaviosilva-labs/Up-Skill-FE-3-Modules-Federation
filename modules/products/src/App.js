@@ -1,23 +1,33 @@
-import React from "react";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import NavBar from "./NavBar";
-import Cart from "./pages/Cart";
+import React, { useEffect } from "react";
+import { BrowserRouter as Router, Link, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Products from "./pages/Products";
 const Home = React.lazy(() => import('home/App'));
 
 export default function App() {
   return (
     <Router>
-      <NavBar />
-
+      <Mourinho />
       <Routes>
-        <Route index element={<Home />} />
         <Route path="products/:productType" element={<Products />} />
-        <Route path="cart" element={<Cart />} />
-        <Route index path="*" element={<NoMatch />} />
       </Routes>
     </Router>
   );
+}
+
+function Mourinho() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    will.subscribe("route-change", ({ route }) => navigate(route));
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname.includes("/products"))
+      will.dispatch("navbar-pathname-update", { route: location.pathname });
+  }, [location]);
+
+  return <></>;
 }
 
 function NoMatch() {

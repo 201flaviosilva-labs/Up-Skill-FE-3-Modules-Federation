@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const ListStyled = styled.nav`
@@ -12,6 +12,19 @@ const ListStyled = styled.nav`
 `;
 
 export default function NavBar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    will.dispatch("route-change", { route: location.pathname, });
+  }, [location]);
+
+  useEffect(() => {
+    will.subscribe("navbar-pathname-update", ({ route }) => {
+      if (!route.includes("/products")) navigate(route);
+    });
+  }, []);
+
   return (
     <nav>
       <ListStyled>
@@ -19,7 +32,7 @@ export default function NavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/products">Products</Link>
+          <Link to="/products/cats">Products</Link>
         </li>
         <li>
           <Link to="/cart">Cart</Link>

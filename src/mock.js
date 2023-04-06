@@ -23,4 +23,10 @@ export const PRODUCTS = [
 		img: "https://loremflickr.com/600/400/socks",
 		price: 1
 	},
+	{
+		id: 5,
+		title: "Beep 4",
+		img: "https://loremflickr.com/600/400/socks",
+		price: 0
+	},
 ];

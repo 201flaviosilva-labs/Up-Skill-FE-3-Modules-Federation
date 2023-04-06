@@ -6,7 +6,7 @@ const {
 exports.devServer = () => ({
 	plugins: [
 		new WebpackPluginServe({
-			port: parseInt(process.env.PORT, 10) || 3000,
+			port: 3002,
 			static: "./dist", // Expose if output.path changes
 			liveReload: true,
 			waitForBuild: true,

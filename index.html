@@ -6,12 +6,31 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite + Svelte</title>
+
+  <script>
+    window.will = {};
+    will.subscribe = (key, callback) => {
+      if (will[key]) will[key].push(callback);
+      else will[key] = [callback];
+    }
+
+    will.dispatch = (key, args) => {
+      will[key] && will[key].forEach(callback => callback(args));
+    }
+
+    
+  </script>
 </head>
 
 <body>
-  <div id="app"></div>
   <div id="root"></div>
+  <div id="root-home"></div>
+  <div id="root-products"></div>
+  <div id="app"></div>
+
   <script src="http://localhost:3000/index_bundle.js" defer></script>
+  <script src="http://localhost:3001/index_bundle.js" defer></script>
+  <script src="http://localhost:3002/index_bundle.js" defer></script>
   <script type="module" src="/src/main.js"></script>
 </body>
 
