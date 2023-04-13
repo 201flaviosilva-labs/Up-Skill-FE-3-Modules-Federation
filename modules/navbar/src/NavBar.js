@@ -1,29 +1,30 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { ListStyled } from "./ListStyled";
 
-const ListStyled = styled.nav`
-  height: 30px;
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
-  padding: 20px;
-  background-color: #ffffe0;
-`;
+export const willDispatch = (location) =>
+  will.dispatch("route-change", { route: location.pathname });
+
+export const navBarPathNameUpdateCallback =
+  (navigate) =>
+  ({ route }) => {
+    if (!route.includes("/products")) navigate(route);
+  };
+
+export const willSubscribe = (navigate) => {
+  will.subscribe(
+    "navbar-pathname-update",
+    navBarPathNameUpdateCallback(navigate)
+  );
+};
 
 export default function NavBar() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    will.dispatch("route-change", { route: location.pathname });
-  }, [location]);
+  useEffect(() => willDispatch(location), [location]);
 
-  useEffect(() => {
-    will.subscribe("navbar-pathname-update", ({ route }) => {
-      if (!route.includes("/products")) navigate(route);
-    });
-  }, []);
+  useEffect(() => willSubscribe(navigate), [navigate]);
 
   return (
     <nav>
