@@ -16,7 +16,7 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    will.dispatch("route-change", { route: location.pathname, });
+    will.dispatch("route-change", { route: location.pathname });
   }, [location]);
 
   useEffect(() => {
